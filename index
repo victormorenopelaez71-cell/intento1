@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Para ti, con amor</title>
+  <style>
+    :root {
+      --pink: #f27b9b;
+      --light-pink: #ffe3eb;
+      --dark-red: #741d35;
+      --cream: #fff7f5;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      margin: 0;
+      display: grid;
+      place-items: center;
+      overflow-x: hidden;
+      padding: 28px 16px;
+      color: var(--dark-red);
+      background:
+        radial-gradient(ellipse at 15% 15%, #ffd1de 0, transparent 38%),
+        radial-gradient(ellipse at 85% 85%, #f6b6c8 0, transparent 38%),
+        var(--cream);
+      font-family: Georgia, "Times New Roman", serif;
+    }
+
+    main {
+      width: min(100%, 700px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .eyebrow {
+      margin: 0 0 24px;
+      color: var(--dark-red);
+      font: 700 0.78rem/1.4 Arial, sans-serif;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+
+    .photo-circle {
+      position: relative;
+      width: min(86vw, 560px);
+      aspect-ratio: 1;
+      border: 2px solid #f27b9b88;
+      border-radius: 50%;
+      background: radial-gradient(circle, #fff4f6 0 34%, #fbd3df 35% 36%, transparent 37%);
+      box-shadow: 0 18px 55px #741d3522;
+    }
+
+    .photo {
+      position: absolute;
+      width: 34%;
+      aspect-ratio: 1;
+      overflow: hidden;
+      border: 5px solid white;
+      border-radius: 50%;
+      background: var(--light-pink);
+      box-shadow: 0 8px 24px #741d3533;
+    }
+
+    .photo img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+    }
+
+    .photo-1 { top: 3%; left: 33%; }
+    .photo-2 { top: 33%; right: 3%; }
+    .photo-3 { bottom: 3%; left: 33%; }
+    .photo-4 { top: 33%; left: 3%; }
+
+    .message {
+      position: absolute;
+      z-index: 2;
+      top: 50%;
+      left: 50%;
+      width: 48%;
+      aspect-ratio: 1;
+      display: grid;
+      place-items: center;
+      padding: 12px;
+      border: 2px solid white;
+      border-radius: 50%;
+      background: #ffe3ebed;
+      box-shadow: 0 5px 25px #741d3522;
+      transform: translate(-50%, -50%);
+    }
+
+    .message p {
+      margin: 0;
+      color: var(--dark-red);
+      font-size: clamp(1rem, 4vw, 1.6rem);
+      font-style: italic;
+      line-height: 1.35;
+    }
+
+    .heart-decoration {
+      margin-top: 21px;
+      color: var(--pink);
+      font-size: 1.4rem;
+      letter-spacing: 0.4em;
+    }
+
+    .love-button {
+      margin-top: 14px;
+      padding: 15px 38px;
+      border: 0;
+      border-radius: 999px;
+      background: var(--dark-red);
+      color: white;
+      box-shadow: 0 8px 22px #741d3540;
+      font: 700 1.1rem Arial, sans-serif;
+      cursor: pointer;
+      transition: transform 160ms ease, background 160ms ease;
+    }
+
+    .love-button:hover {
+      transform: translateY(-3px);
+      background: #a52e50;
+    }
+
+    .love-button:focus-visible,
+    .close-button:focus-visible {
+      outline: 3px solid var(--pink);
+      outline-offset: 4px;
+    }
+
+    .little-note {
+      margin: 17px 0 0;
+      color: #8f4b60;
+      font-size: 0.95rem;
+      font-style: italic;
+    }
+
+    dialog {
+      width: min(92vw, 700px);
+      max-width: none;
+      padding: 16px;
+      border: 1px solid #f27b9b;
+      border-radius: 20px;
+      background: #10080c;
+      color: white;
+      box-shadow: 0 20px 70px #0008;
+    }
+
+    dialog::backdrop {
+      background: #310d1ddd;
+      backdrop-filter: blur(4px);
+    }
+
+    .dialog-heading {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 0 3px 12px;
+      font: 700 1rem Arial, sans-serif;
+    }
+
+    .close-button {
+      width: 38px;
+      height: 38px;
+      border: 1px solid #ffffff66;
+      border-radius: 50%;
+      background: transparent;
+      color: white;
+      font-size: 1.4rem;
+      cursor: pointer;
+    }
+
+    canvas {
+      display: block;
+      width: 100%;
+      height: min(65vh, 480px);
+    }
+
+    @media (max-width: 380px) {
+      .photo {
+        border-width: 3px;
+      }
+
+      .message {
+        width: 50%;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <p class="eyebrow">Un pequeño regalo para ti</p>
+
+    <section class="photo-circle" aria-label="Nuestros recuerdos">
+      <div class="photo photo-1">
+  <img src="fotos/foto-1.jpeg" alt="Un recuerdo juntos">
+</div>
+<div class="photo photo-2">
+  <img src="fotos/foto-2.jpeg" alt="Otro recuerdo juntos">
+</div>
+<div class="photo photo-3">
+  <img src="fotos/foto-3.jpeg" alt="Un momento especial">
+</div>
+<div class="photo photo-4">
+  <img src="fotos/foto-4.jpeg" alt="Un día bonito juntos">
+</div>
+
+      <div class="message">
+        <p>Cada día a tu lado se siente mágico</p>
+      </div>
+    </section>
+
+    <div class="heart-decoration" aria-hidden="true">♥ ♥ ♥</div>
+    <button class="love-button" id="open-heart" type="button">Te amo</button>
+    <p class="little-note">Hecho con mucho amor, para ti.</p>
+  </main>
+
+  <dialog id="heart-dialog" aria-label="Una sorpresa de corazón">
+    <div class="dialog-heading">
+      <span>Con todo mi amor ♥</span>
+      <button class="close-button" id="close-heart" type="button" aria-label="Cerrar">×</button>
+    </div>
+    <canvas id="heart-canvas" aria-label="Un corazón animado con las palabras Te amo"></canvas>
+  </dialog>
+
+  <script>
+    const dialog = document.querySelector("#heart-dialog");
+    const canvas = document.querySelector("#heart-canvas");
+    const ctx = canvas.getContext("2d");
+    let animationFrame;
+
+    function drawHeart() {
+      cancelAnimationFrame(animationFrame);
+
+      const rect = canvas.getBoundingClientRect();
+      const pixelRatio = window.devicePixelRatio || 1;
+
+      canvas.width = rect.width * pixelRatio;
+      canvas.height = rect.height * pixelRatio;
+      ctx.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
+
+      const width = rect.width;
+      const height = rect.height;
+      const scale = Math.min((width - 36) / 480, (height - 36) / 510);
+      const centerX = width / 2;
+      const centerY = height / 2;
+
+      ctx.clearRect(0, 0, width, height);
+      ctx.strokeStyle = "hotpink";
+      ctx.fillStyle = "hotpink";
+      ctx.lineWidth = Math.max(1, 2 * scale);
+      ctx.lineCap = "round";
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      ctx.font = `bold ${Math.max(7, 9 * scale)}px Arial`;
+
+      let i = 0;
+      let previousPoint = null;
+
+      function animate() {
+        const batchEnd = Math.min(i + 4, 600);
+
+        while (i < batchEnd) {
+          const t = i / 20;
+          const x = 16 * Math.sin(t) ** 3;
+          const y =
+            13 * Math.cos(t) -
+            5 * Math.cos(2 * t) -
+            2 * Math.cos(3 * t) -
+            Math.cos(4 * t);
+
+          const point = {
+            x: centerX + x * 15 * scale,
+            y: centerY - y * 15 * scale
+          };
+
+          if (previousPoint) {
+            ctx.beginPath();
+            ctx.moveTo(previousPoint.x, previousPoint.y);
+            ctx.lineTo(point.x, point.y);
+            ctx.stroke();
+          }
+
+          if (i % 10 === 0) {
+            ctx.fillText("Te amo", point.x, point.y);
+          }
+
+          previousPoint = point;
+          i++;
+        }
+
+        if (i < 600) {
+          animationFrame = requestAnimationFrame(animate);
+        }
+      }
+
+      animate();
+    }
+
+    document.querySelector("#open-heart").addEventListener("click", () => {
+      dialog.showModal();
+      requestAnimationFrame(drawHeart);
+    });
+
+    function closeDialog() {
+      dialog.close();
+      cancelAnimationFrame(animationFrame);
+    }
+
+    document.querySelector("#close-heart").addEventListener("click", closeDialog);
+
+    dialog.addEventListener("click", (event) => {
+      if (event.target === dialog) closeDialog();
+    });
+
+    window.addEventListener("resize", () => {
+      if (dialog.open) drawHeart();
+    });
+  </script>
+</body>
+</html>
